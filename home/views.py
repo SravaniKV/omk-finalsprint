@@ -76,9 +76,7 @@ def emptask(request):
     return render(request, 'home/emptask.html',
                   {'emptask': emptask})
 
-def mentorlist(request):
-    return render(request, 'home/mentorlist.html',
-                  {'mentorlist': mentorlist})
+
 
 def logout_user(request):
     logout(request)
@@ -200,3 +198,26 @@ def studentsarchive(request):
            print("else")
      #  form = StudentForm(instance=student)
       # return render(request, 'home/studentsarchive.html', {'form': form})
+
+def mentor_list(request):
+    mentor_list = Mentor.objects.filter(begining_date__lte=timezone.now())
+    return render(request, 'home/mentorlist.html',
+                 {'home': mentor_list})
+
+
+
+def mentor_edit(request, pk):
+   mentor = get_object_or_404(Mentor, pk=pk)
+   if request.method == "POST":
+       form = MentorForm(request.POST, instance=mentor)
+       if form.is_valid():
+           mentor = form.save()
+           # stock.customer = stock.id
+           mentor.updated_date = timezone.now()
+           mentor.save()
+           mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
+           return render(request, 'home/mentorlist.html', {'mentor': mentors})
+   else:
+       # print("else")
+       form = MentorForm(instance=mentor)
+   return render(request, 'home/mentoredit.html', {'form': form})
