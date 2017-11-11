@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 
 
+from django.http import JsonResponse
 from django.utils import timezone
 from .models import *
 from django.shortcuts import render, get_object_or_404
@@ -12,8 +13,23 @@ from .forms import *
 from django.db.models import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.db.models import Q
+from .models import Student,Mentor,Employee
+from .forms import StudentForm,UserForm,EmployeeForm
 
 
+def search(request):
+    students = Student.objects.values('Student_name', 'Student_grade', 'School')
+    query = request.GET.get("q")
+    if query:
+        students = students.filter(
+            Q(Student_name__icontains=query)
+        ).distinct()
+        return render(request, 'home/emphome.html', {
+            'students': students,
+        })
+    else:
+        return render(request, 'home/emphome.html', {'students': students})
 
 def home(request):
     return render(request, 'home/base.html',
@@ -37,8 +53,9 @@ def empindex(request):
                   {'empindex': empindex})
 
 def emphome(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
     return render(request, 'home/emphome.html',
-                  {'emphome': emphome})
+                  {'home': students})
 
 def mentorhome(request):
     return render(request, 'home/mentorhome.html',
@@ -144,8 +161,8 @@ def Student_list(request):
     {'home': students})
 
 
-def studentedit(request):
-   student = get_object_or_404(Student)
+def studentedit(request,pk):
+   student = get_object_or_404(Student,pk=pk)
    if request.method == "POST":
        form = StudentForm(request.POST, instance=student)
        if form.is_valid():
@@ -216,7 +233,7 @@ def mentor_edit(request, pk):
            mentor.updated_date = timezone.now()
            mentor.save()
            mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
-           return render(request, 'home/mentorlist.html', {'mentor': mentors})
+           return render(request, 'home/mentorlist.html', {'mentors': mentors})
    else:
        # print("else")
        form = MentorForm(instance=mentor)

@@ -8,7 +8,6 @@
             <tr class="bg-info">
                 <th>Student ID</th>
                 <th>Student Name</th>
-                <th>Student Email</th>
                 <th>Student Grade</th>
                 <th>Parents Email</th>
                 <th>Parents Phone</th>
@@ -23,22 +22,21 @@
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
-                    <td>{{ students.Student_email }}</td>
                     <td>{{ students.Student_grade }}</td>
                     <td>{{ students.Parents_email }}</td>
                     <td>{{ students.Parents_phone }}</td>
                     <td>{{ students.School }}</td>
                     <td>{{ students.Men_name }}</td>
                     <td>{{ students.Emp_name }}</td>
-                    <td><a href="{% url 'home:studentedit' %}" class="btn btn-warning">Edit</a>
+                    <td><a href="{% url 'home:studentedit' pk=students.pk%}" class="btn btn-warning">Edit</a>
                     <td><a href="{% url 'home:studentsarchive' %}" class="btn btn-danger">Archive</a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-             <div class="row">
-            <a href="{% url 'home:studentadd' %}" class="row"><span
+             <br class="row">
+                 <a href="{% url 'home:studentadd' %}" class="row"><span
                     class="btn btn-primary">Add Student</span></a>
         </div>
         </div>

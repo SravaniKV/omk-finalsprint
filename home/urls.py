@@ -4,6 +4,7 @@ app_name ='home'
 
 urlpatterns = [
     url(r'^$', views.home, name='base'),
+    url(r'^search/$', views.search, name='search'),
     url(r'^home/$', views.home, name='base'),
     url(r'^base/$', views.home, name='base'),
    #url(r'^home/$', include('omk.urls')),
@@ -28,7 +29,7 @@ urlpatterns = [
     url(r'^emptask/$', views.emptask, name='emptask'),
     url(r'^mentorlist/$', views.mentor_list, name='mentorlist'),
     url(r'^studentlist/$', views.Student_list, name='studentlist'),
-    url(r'^studentedit/$', views.studentedit, name='studentedit'),
+    url(r'^student/(?P<pk>\d+)/edit/$', views.studentedit, name='studentedit'),
     url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
     url(r'^studentadd/$', views.studentadd, name='studentadd'),
         ]

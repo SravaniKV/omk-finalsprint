@@ -4,30 +4,36 @@
 <p> This is Employee Home Page</p>
 <div class="align-middle">
 
-  <form class="form-wrapper" style="text-align: center;">
+  <!--<form class="form-wrapper" style="text-align: center;" role="search" method="get" action ="{% url 'home:emphome' %}">
   <h3>Search Students here</h3>
-  <input type="text" id="search" placeholder="Search for..." required>
+  <input type="text" id="search"  name="q" value="{{ request.GET.q }}" placeholder="Search for..." required>
   <input type="submit" value="Go" id="submit">
-  </form>
+  </form>-->
+
+            <form class ="navbar-form navbar-left" style="text-align: center;" role="search" method="get" action="{% url 'home:search' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search for..." required>
+                </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+            </form>
+
  </div>
 
 <div>
 <table class="table table-striped table-bordered table-hover">
 <thead>
 <tr class="bg-info">
-<th>Student ID</th>
 <th>Student Name</th>
 <th>Student Grade</th>
 <th>Student School Name</th>
 </tr>
 </thead>
 <tbody>
-{% for Student_list in home %}
+{% for students in home %}
 <tr>
-<td>{{ Student_list.Student_id }}</td>
-<td>{{ Student_list.Student_name }}</td>
-<td>{{ Student_list.Student_grade }}</td>
-<td>{{ Student_list.School }}</td>
+<td>{{ students.Student_name }}</td>
+<td>{{ students.Student_grade }}</td>
+<td>{{ students.School }}</td>
 
 </tr>
 {% endfor %}
