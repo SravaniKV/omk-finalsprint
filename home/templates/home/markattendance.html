@@ -17,16 +17,11 @@
                 </tr>
               </thead>
               <tbody>
-              <tr> <td>
-                        <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                        </label>
-                  </td></tr>
-              {% for Student_list in home %}
+              {% for students in markattendance %}
+                {% ifequal students.Men_name|stringformat:"s" user.username %}
                 <tr>
-                  <td>{{ Student_list.Student_name }}</td>
-                  <td>{{ Student_list.Student_grade }}</td>
+                  <td>{{ students.Student_name }}</td>
+                  <td>{{ students.Student_grade }}</td>
                   <td>
                         <label class="switch">
                         <input id="toggle-slider_position()" type="checkbox">
@@ -34,6 +29,7 @@
                         </label>
                   </td>
                 </tr>
+                {% endifequal %}
               {% endfor %}
               </tbody>
 

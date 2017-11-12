@@ -62,8 +62,9 @@ def mentorhome(request):
                   {'mentorhome': mentorhome})
 
 def markattendance(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
     return render(request, 'home/markattendance.html',
-                  {'markattendance': markattendance})
+                  {'markattendance': students})
 
 def studentsreports(request):
     return render(request, 'home/studentsreports.html',

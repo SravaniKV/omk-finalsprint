@@ -70,6 +70,9 @@ class Student(models.Model):
      def __str__(self):
        return str(self.Emp_name)
 
+     def __str__(self):
+       return str(self.Student_name)
+
 class Appointment(models.Model):
     Sname = models.ForeignKey(Student, related_name='Appointment')
     Mname = models.ForeignKey(Mentor, related_name='Appointment')
@@ -84,6 +87,8 @@ class ClassName(models.Model):
     class_name = models.CharField(max_length=20)
     class_date=models.DateField(blank=True, null=True)
     Mentor= models.ForeignKey(Mentor, related_name='class_mentor')
+    student = models.ManyToManyField(Student, related_name='class_student')
+    attendance = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.class_name)
