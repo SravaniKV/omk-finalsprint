@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Employee, Mentor, Student
+from .models import Employee, Mentor, Student , ClassName
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
@@ -27,3 +27,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'password',]
 
+
+class ClassNameForm(forms.ModelForm):
+      class Meta:
+          model = ClassName
+          fields=('class_name', 'class_date','Mentor',)

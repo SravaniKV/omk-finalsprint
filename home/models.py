@@ -80,7 +80,13 @@ class Appointment(models.Model):
         return str(self.sname)
 
 
+class ClassName(models.Model):
+    class_name = models.CharField(max_length=20)
+    class_date=models.DateField(blank=True, null=True)
+    Mentor= models.ForeignKey(Mentor, related_name='class_mentor')
 
+    def __str__(self):
+        return str(self.class_name)
 
 
 
