@@ -94,6 +94,11 @@ def emptask(request):
     return render(request, 'home/emptask.html',
                   {'emptask': emptask})
 
+def mentstudlist(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
+    return render(request, 'home/mentstudlist.html',
+                  {'students': students})
+
 
 
 def logout_user(request):
@@ -238,6 +243,21 @@ def mentor_edit(request, pk):
    else:
        form = MentorForm(instance=mentor)
    return render(request, 'home/mentoredit.html', {'form': form})
+
+def mentor_new(request):
+    if request.method == "POST":
+        form = MentorForm(request.POST)
+        if form.is_valid():
+            mentor = form.save(commit=False)
+            mentor.start_date = timezone.now()
+            mentor.save()
+            mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
+            return render(request, 'home/mentorlist.html',
+                          {'mentors': mentors})
+    else:
+        form = MentorForm()
+        # print("Else")
+    return render(request, 'home/mentornew.html', {'form': form})
 
 
 
