@@ -18,18 +18,44 @@ from .models import Student,Mentor,Employee
 from .forms import StudentForm,UserForm,EmployeeForm
 
 
-def search(request):
-    students = Student.objects.values('Student_name', 'Student_grade', 'School')
-    query = request.GET.get("q")
-    if query:
-        students = students.filter(
-            Q(Student_name__icontains=query)
-        ).distinct()
-        return render(request, 'home/emphome.html', {
-            'students': students,
-        })
+def searchemp(request):
+    name_query = request.GET.get("name")
+    grade_query = request.GET.get("grade")
+
+    # if you want get user from request
+    # user = request.user.username
+
+    students = None
+    if (len(name_query) > 0) and (len(grade_query) > 0):
+        students = Student.objects.filter(
+            Q(Student_name__icontains=name_query, Student_grade__icontains=grade_query)).distinct()
+    elif len(name_query) > 0:
+        students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
+    elif len(grade_query) > 0:
+        students = Student.objects.filter(Q(Student_grade__icontains=grade_query)).distinct()
     else:
-        return render(request, 'home/emphome.html', {'students': students})
+        pass
+    return render(request, 'home/emphome.html', {'students': students})
+
+
+def searchment(request):
+    name_query = request.GET.get("name")
+    grade_query = request.GET.get("grade")
+
+    # if you want get user from request
+    # user = request.user.username
+
+    students = None
+    if (len(name_query) > 0) and (len(grade_query) > 0):
+        students = Student.objects.filter(
+            Q(Student_name__icontains=name_query, Student_grade__icontains=grade_query)).distinct()
+    elif len(name_query) > 0:
+        students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
+    elif len(grade_query) > 0:
+        students = Student.objects.filter(Q(Student_grade__icontains=grade_query)).distinct()
+    else:
+        pass
+    return render(request, 'home/mentorhome.html', {'students': students})
 
 def home(request):
     return render(request, 'home/base.html',
@@ -53,13 +79,14 @@ def empindex(request):
                   {'empindex': empindex})
 
 def emphome(request):
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.filter(Emp_name__Employee_name=request.user.username)
     return render(request, 'home/emphome.html',
-                  {'home': students})
+                  {'students': students})
 
 def mentorhome(request):
+    students = Student.objects.filter(Men_name__Mentor_name=request.user.username)
     return render(request, 'home/mentorhome.html',
-                  {'mentorhome': mentorhome})
+                  {'students':students})
 
 def markattendance(request):
     students = Student.objects.filter(start_date__lte=timezone.now())
@@ -95,9 +122,10 @@ def emptask(request):
                   {'emptask': emptask})
 
 def mentstudlist(request):
+    users = User.objects.all()
     students = Student.objects.filter(start_date__lte=timezone.now())
     return render(request, 'home/mentstudlist.html',
-                  {'students': students})
+                  {'students': students,'users': users})
 
 
 
@@ -118,10 +146,10 @@ def login_user(request):
         if user is not None:
             if user.is_staff:
                 login(request, user)
-                return render(request, 'home/emphome.html')
+                return emphome(request)
             else:
                 login(request, user)
-                return render(request, 'home/mentorhome.html')
+                return mentorhome(request)
         else:
             return render(request, 'home/login.html', {'error_message': 'Invalid login'})
     return render(request, 'home/login.html')
@@ -221,21 +249,19 @@ def studentsarchive(request):
            print("else")
      #  form = StudentForm(instance=student)
       # return render(request, 'home/studentsarchive.html', {'form': form})
-@login_required
+
 def mentor_list(request):
     mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
     return render(request, 'home/mentorlist.html',
                  {'mentors': mentors})
 
 
-@login_required
 def mentor_edit(request, pk):
    mentor = get_object_or_404(Mentor, pk=pk)
    if request.method == "POST":
        form = MentorForm(request.POST, instance=mentor)
        if form.is_valid():
            mentor = form.save()
-           # stock.customer = stock.id
            mentor.updated_date = timezone.now()
            mentor.save()
            mentors = Mentor.objects.filter(begining_date__lte=timezone.now())

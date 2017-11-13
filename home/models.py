@@ -53,8 +53,10 @@ class Student(models.Model):
      School= models.CharField(max_length=49)
      Men_name =models.ForeignKey(Mentor,related_name='Menemail')
      Emp_name= models.ForeignKey(Employee, related_name='Empemail')
+     Comments=models.CharField(max_length=200, null=True)
      start_date = models.DateTimeField(default=timezone.now)
      last_date = models.DateField(blank=True, null=True)
+
 
      def create(self):
          self.start_date = timezone.now()

@@ -8,27 +8,26 @@
             <tr class="bg-info">
                 <th>Student ID</th>
                 <th>Student Name</th>
-                <th>Student Grade</th>
                 <th>Parents Email</th>
                 <th>Parents Phone</th>
                 <th>School</th>
-                <th>Mentor Name</th>
-                <th>Employee Name</th>
             </tr>
             </thead>
             <tbody>
+
             {% for students in students %}
+
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
-                    <td>{{ students.Student_grade }}</td>
                     <td>{{ students.Parents_email }}</td>
                     <td>{{ students.Parents_phone }}</td>
                     <td>{{ students.School }}</td>
-                    <td>{{ students.Men_name }}</td>
-                    <td>{{ students.Emp_name }}</td>
                 </tr>
+
             {% endfor %}
+
+
             </tbody>
         </table>
         </div>

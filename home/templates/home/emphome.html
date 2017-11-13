@@ -1,7 +1,6 @@
 {% extends 'home/empindex.html' %}
 {% block content %}
 
-<p> This is Employee Home Page</p>
 <div class="align-middle">
 
   <!--<form class="form-wrapper" style="text-align: center;" role="search" method="get" action ="{% url 'home:emphome' %}">
@@ -10,9 +9,10 @@
   <input type="submit" value="Go" id="submit">
   </form>-->
 
-            <form class ="navbar-form navbar-left" style="text-align: center;" role="search" method="get" action="{% url 'home:search' %}">
+            <form class ="navbar-form navbar-left" style="text-align: center;" role="search" method="get" action="{% url 'home:searchemp' %}">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search for..." required>
+                    <input type="text" class="form-control" name="name" value="{{ request.GET.name }}" placeholder="Search by name" >
+                    <input type="text" class="form-control" name="grade" value="{{ request.GET.grade }}" placeholder="Search by grade" >
                 </div>
                     <button type="submit" class="btn btn-default">Search</button>
             </form>
@@ -29,11 +29,11 @@
 </tr>
 </thead>
 <tbody>
-{% for students in home %}
+{% for student in students %}
 <tr>
-<td>{{ students.Student_name }}</td>
-<td>{{ students.Student_grade }}</td>
-<td>{{ students.School }}</td>
+<td>{{ student.Student_name }}</td>
+<td>{{ student.Student_grade }}</td>
+<td>{{ student.School }}</td>
 
 </tr>
 {% endfor %}
