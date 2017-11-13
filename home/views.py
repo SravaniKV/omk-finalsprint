@@ -159,7 +159,7 @@ def password_reset_complete(request):
 def Student_list(request):
     students = Student.objects.filter(start_date__lte=timezone.now())
     return render(request, 'home/studentlist.html',
-    {'home': students})
+    {'students': students})
 
 
 def studentedit(request,pk):
@@ -172,7 +172,7 @@ def studentedit(request,pk):
            student.updated_date = timezone.now()
            student.save()
            students = Student.objects.filter(start_date__lte=timezone.now())
-           return render(request, 'home/studentlist.html', {'student': students})
+           return render(request, 'home/studentlist.html', {'students': students})
    else:
        # print("else")
        form = StudentForm(instance=student)
@@ -187,7 +187,7 @@ def studentadd(request):
             student.save()
             students = Student.objects.filter(start_date__lte=timezone.now())
             return render(request, 'home/studentlist.html',
-                          {'student': students})
+                          {'students': students})
     else:
         form = StudentForm()
         # print("Else")
@@ -210,20 +210,20 @@ def studentsarchive(request):
            print("5")
            student_arch.delete()
            students = StudentForm(instance=student)
-           return render(request, 'home/studentlist.html', {'student': students})
+           return render(request, 'home/studentlist.html', {'students': students})
 
     else:
            print("else")
      #  form = StudentForm(instance=student)
       # return render(request, 'home/studentsarchive.html', {'form': form})
-
+@login_required
 def mentor_list(request):
-    mentor_list = Mentor.objects.filter(begining_date__lte=timezone.now())
+    mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
     return render(request, 'home/mentorlist.html',
-                 {'home': mentor_list})
+                 {'mentors': mentors})
 
 
-
+@login_required
 def mentor_edit(request, pk):
    mentor = get_object_or_404(Mentor, pk=pk)
    if request.method == "POST":
@@ -236,6 +236,8 @@ def mentor_edit(request, pk):
            mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
            return render(request, 'home/mentorlist.html', {'mentors': mentors})
    else:
-       # print("else")
        form = MentorForm(instance=mentor)
    return render(request, 'home/mentoredit.html', {'form': form})
+
+
+

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^mentoredit/(?P<pk>\d+)/edit/$', views.mentor_edit, name='mentor_edit'),
     url(r'^emptask/$', views.emptask, name='emptask'),
     url(r'^mentorlist/$', views.mentor_list, name='mentorlist'),
+    #url(r'^mentornew/$', views.mentor_new, name='mentornew'),
     url(r'^studentlist/$', views.Student_list, name='studentlist'),
     url(r'^student/(?P<pk>\d+)/edit/$', views.studentedit, name='studentedit'),
     url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),

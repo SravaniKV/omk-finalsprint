@@ -30,23 +30,24 @@
             </tr>
             </thead>
             <tbody>
-            {% for mentor_list in home %}
+            {% for mentors in mentors %}
                 <tr>
-                    <td>{{ mentor_list.Mentor_Id }}</td>
-                    <td>{{ mentor_list.Mentor_name }}</td>
-                    <td>{{ mentor_list.Mentor_Address }}</td>
-                    <td>{{ mentor_list.Mentor_Gender }}</td>
-                    <td>{{ mentor_list.Mentor_phone }}</td>
-                    <td>{{ mentor_list.Mentor_email }}</td>
-                    <td><a href="{% url 'home:mentor_edit' pk=mentor_list.pk %}" class="btn btn-warning">Edit</a>
+                    <td>{{ mentors.Mentor_Id }}</td>
+                    <td>{{ mentors.Mentor_name }}</td>
+                    <td>{{ mentors.Mentor_Address }}</td>
+                    <td>{{ mentors.Mentor_Gender }}</td>
+                    <td>{{ mentors.Mentor_phone }}</td>
+                    <td>{{ mentors.Mentor_email }}</td>
+                    <td>ee</td>
+                    <td><a href="{% url 'home:mentor_edit' pk=mentors.pk %}" class="btn btn-warning">Edit</a>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        {#        <div class="row">#}
-        {#            <a href="{% url 'home:mentor_new' %}" class="row"><span#}
-        {#                    class="btn btn-primary">Add Customer</span></a>#}
-        {#        </div>#}
+        {#       <div class="row">#}
+        {#          <a href="{% url 'home:mentor_new' %}" class="row"><span#}
+        {#                    class="btn btn-primary">Add Mentor</span></a>#}
+        {#      </div>#}
         </div>
     </div>
     </div>
