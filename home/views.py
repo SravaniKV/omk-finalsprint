@@ -194,6 +194,11 @@ def Student_list(request):
     return render(request, 'home/studentlist.html',
     {'students': students})
 
+def Student_Report(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
+    return render(request, 'home/studentsreports.html',
+    {'students': students})
+
 
 def studentedit(request,pk):
    student = get_object_or_404(Student,pk=pk)

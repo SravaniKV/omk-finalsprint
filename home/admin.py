@@ -10,14 +10,13 @@ class EmployeeList(admin.ModelAdmin):
 
 
 class MentorList(admin.ModelAdmin):
-    list_display = ('Mentor_name', 'Mentor_phone', 'Mentor_Id','Mentor_Address','Mentor_Gender','begining_date','ending_date')
-    search_fields = ('Mentor_name', 'Mentor_phone','Mentor_Id','begining_date','ending_date')
+    list_display = ('Mentor_name', 'Mentor_phone', 'Mentor_Id','Mentor_Address','Mentor_Gender','begining_date','ending_date','Mentor_email')
+    search_fields = ('Mentor_name', 'Mentor_phone','Mentor_Id','begining_date','ending_date','Mentor_email')
 
 class StudentList(admin.ModelAdmin):
-    list_display = ('Student_id', 'Student_name', 'Student_email', 'Student_grade','Parents_email',
-                    'Parents_phone', 'School', 'Men_name','Emp_name','start_date','last_date')
-    search_fields = ('Student_name', 'Student_id', 'School' ,'Parents_phone','start_date','last_date',)
-
+    list_display = ('Student_id', 'Student_name', 'Student_Class', 'Student_curr_grade', 'Student_prev_grade', 'Parents_email',
+    'Parents_phone', 'School', 'Men_name', 'Emp_name', 'start_date', 'last_date')
+    search_fields = ('Student_name', 'Student_id', 'School', 'Parents_phone', 'start_date', 'last_date', 'Student_Class')
 
 class ClassNameList(admin.ModelAdmin):
     list_display = ('class_name', 'class_date','Mentor')

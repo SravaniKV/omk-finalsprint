@@ -1,5 +1,4 @@
 {% extends 'home/empindex.html' %}
-{% extends 'home/index.html' %}
 {% block content %}
     <div class="row">
         <h2 style="padding-left: 15Px">Students Report Information</h2>
@@ -18,7 +17,6 @@
             <tbody>
 
             {% for students in students %}
-
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
@@ -27,10 +25,7 @@
                     <td>{{ students.Student_current_grade }}</td>
                     <td>{{ students.Comments }}</td>
                 </tr>
-
             {% endfor %}
-
-
             </tbody>
         </table>
         </div>
