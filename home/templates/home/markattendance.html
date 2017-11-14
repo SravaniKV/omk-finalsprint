@@ -1,7 +1,6 @@
 {% extends 'home/index.html' %}
 {% block content %}
 
-<p> This is mark attendance Page</p>
 <div class="container-fluid">
 
 <div>
@@ -12,16 +11,16 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Grade</th>
+                  <th>Class</th>
                   <th>Attendance</th>
                 </tr>
               </thead>
               <tbody>
-              {% for students in markattendance %}
-                {% ifequal students.Men_name|stringformat:"s" user.username %}
+              {% for students in students %}
+              {% ifequal students.Men_name|stringformat:"s" user.username %}
                 <tr>
                   <td>{{ students.Student_name }}</td>
-                  <td>{{ students.Student_grade }}</td>
+                  <td>{{ students.Student_Class }}</td>
                   <td>
                         <label class="switch">
                         <input id="toggle-slider_position()" type="checkbox">

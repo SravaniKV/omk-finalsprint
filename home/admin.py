@@ -15,7 +15,7 @@ class MentorList(admin.ModelAdmin):
 
 class StudentList(admin.ModelAdmin):
     list_display = ('Student_id', 'Student_name', 'Student_Class', 'Student_curr_grade', 'Student_prev_grade', 'Parents_email',
-    'Parents_phone', 'School', 'Men_name', 'Emp_name', 'start_date', 'last_date')
+    'Parents_phone', 'School', 'Men_name', 'Emp_name','Comments', 'start_date', 'last_date')
     search_fields = ('Student_name', 'Student_id', 'School', 'Parents_phone', 'start_date', 'last_date', 'Student_Class')
 
 class ClassNameList(admin.ModelAdmin):

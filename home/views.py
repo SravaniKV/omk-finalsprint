@@ -20,19 +20,22 @@ from .forms import StudentForm,UserForm,EmployeeForm
 
 def searchemp(request):
     name_query = request.GET.get("name")
-    grade_query = request.GET.get("grade")
+    curr_grade_query = request.GET.get("currgrade")
+    prev_grade_query = request.GET.get("prevgrade")
 
     # if you want get user from request
     # user = request.user.username
 
     students = None
-    if (len(name_query) > 0) and (len(grade_query) > 0):
+    if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
         students = Student.objects.filter(
-            Q(Student_name__icontains=name_query, Student_grade__icontains=grade_query)).distinct()
+            Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,Student_prev_grade__icontains=prev_grade_query)).distinct()
     elif len(name_query) > 0:
         students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
-    elif len(grade_query) > 0:
-        students = Student.objects.filter(Q(Student_grade__icontains=grade_query)).distinct()
+    elif len(curr_grade_query) > 0:
+        students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
+    elif len(prev_grade_query) > 0:
+        students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
     else:
         pass
     return render(request, 'home/emphome.html', {'students': students})
@@ -40,19 +43,23 @@ def searchemp(request):
 
 def searchment(request):
     name_query = request.GET.get("name")
-    grade_query = request.GET.get("grade")
+    curr_grade_query = request.GET.get("currgrade")
+    prev_grade_query = request.GET.get("prevgrade")
 
     # if you want get user from request
     # user = request.user.username
 
     students = None
-    if (len(name_query) > 0) and (len(grade_query) > 0):
+    if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
         students = Student.objects.filter(
-            Q(Student_name__icontains=name_query, Student_grade__icontains=grade_query)).distinct()
+            Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,
+              Student_prev_grade__icontains=prev_grade_query)).distinct()
     elif len(name_query) > 0:
         students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
-    elif len(grade_query) > 0:
-        students = Student.objects.filter(Q(Student_grade__icontains=grade_query)).distinct()
+    elif len(curr_grade_query) > 0:
+        students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
+    elif len(prev_grade_query) > 0:
+        students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
     else:
         pass
     return render(request, 'home/mentorhome.html', {'students': students})
@@ -89,13 +96,13 @@ def mentorhome(request):
                   {'students':students})
 
 def markattendance(request):
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.all()
     return render(request, 'home/markattendance.html',
-                  {'markattendance': students})
+                  {'students': students})
 
-def studentsreports(request):
-    return render(request, 'home/studentsreports.html',
-                  {'studentsreports': studentsreports})
+#def studentsreports(request):
+#    return render(request, 'home/studentsreports.html',
+#                  {'studentsreports': studentsreports})
 
 def createappointments(request):
     return render(request, 'home/createappointments.html',
@@ -109,9 +116,9 @@ def empmarkattendance(request):
     return render(request, 'home/empmarkattendance.html',
                   {'empmarkattendance': empmarkattendance})
 
-def empstudentsreports(request):
-    return render(request, 'home/empstudentsreports.html',
-                  {'empstudentsreports': empstudentsreports})
+#def empstudentsreports(request):
+#    return render(request, 'home/empstudentsreports.html',
+#                  {'empstudentsreports': empstudentsreports})
 
 def empcreateappointments(request):
     return render(request, 'home/empcreateappointments.html',
@@ -122,10 +129,10 @@ def emptask(request):
                   {'emptask': emptask})
 
 def mentstudlist(request):
-    users = User.objects.all()
+    #users = request.user.username()
     students = Student.objects.filter(start_date__lte=timezone.now())
     return render(request, 'home/mentstudlist.html',
-                  {'students': students,'users': users})
+                  {'students': students})
 
 
 
@@ -199,6 +206,42 @@ def Student_Report(request):
     return render(request, 'home/studentsreports.html',
     {'students': students})
 
+def Emp_Student_Report(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
+    return render(request, 'home/empstudentsreports.html',
+    {'students': students})
+
+def Student_Report_Edit(request,pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == "POST":
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            student = form.save()
+            student.updated_date = timezone.now()
+            student.save()
+            students = Student.objects.filter(start_date__lte=timezone.now())
+            return render(request, 'home/studentsreports.html',
+            {'students': students})
+    else:
+        form = StudentForm(instance=student)
+        return render(request, 'home/studreportedit.html', {'form': form})
+
+
+def Emp_Student_Report_Edit(request,pk):
+    student = get_object_or_404(Student,pk=pk)
+    if request.method == "POST":
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            student = form.save()
+            student.updated_date = timezone.now()
+            student.save()
+            students = Student.objects.filter(start_date__lte=timezone.now())
+            return render(request, 'home/empstudentsreports.html',
+            {'students': students})
+    else:
+        form = StudentForm(instance=student)
+        return render(request, 'home/empstudreportedit.html', {'form': form})
+
 
 def studentedit(request,pk):
    student = get_object_or_404(Student,pk=pk)
@@ -206,7 +249,6 @@ def studentedit(request,pk):
        form = StudentForm(request.POST, instance=student)
        if form.is_valid():
            student = form.save()
-           # stock.customer = stock.id
            student.updated_date = timezone.now()
            student.save()
            students = Student.objects.filter(start_date__lte=timezone.now())

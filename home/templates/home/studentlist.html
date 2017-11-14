@@ -18,6 +18,7 @@
             <tbody>
             {% now 'Y-m-d' as currt_date %}
             {% for students in students %}
+
                 {% if students.last_date|date:"Y-m-d" >= currt_date or students.last_date == NULL %}
                 <tr>
                     <td>{{ students.Student_id }}</td>
@@ -25,11 +26,13 @@
                     <td>{{ students.Parents_email }}</td>
                     <td>{{ students.Parents_phone }}</td>
                     <td>{{ students.School }}</td>
+                    <td>{{students.Men_name}}</td>
                     <td><a href="{% url 'home:studentedit' pk=students.pk%}" class="btn btn-warning">Edit</a>
                     <td><a href="{% url 'home:studentsarchive' %}" class="btn btn-danger">Archive</a>
                     </td>
                 </tr>
                 {% endif %}
+
             {% endfor %}
             </tbody>
         </table>

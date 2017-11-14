@@ -12,6 +12,7 @@
                 <th>Student Prev Grade</th>
                 <th>Student Current Grade</th>
                 <th>Comments</th>
+                <th colspan="3">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -20,10 +21,11 @@
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
-                    <td>{{ students.Student_class }}</td>
+                    <td>{{ students.Student_Class }}</td>
                     <td>{{ students.Student_prev_grade }}</td>
-                    <td>{{ students.Student_current_grade }}</td>
+                    <td>{{ students.Student_curr_grade }}</td>
                     <td>{{ students.Comments }}</td>
+                    <td><a href="{% url 'home:Emp_Student_Report_Edit' pk=students.pk%}" class="btn btn-warning">Edit</a>
                 </tr>
             {% endfor %}
             </tbody>

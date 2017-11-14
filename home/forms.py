@@ -18,7 +18,7 @@ class StudentForm(forms.ModelForm):
     class Meta:
          model = Student
          fields =('Student_id','Student_name','Student_curr_grade','Student_prev_grade','Student_Class',
-                   'Parents_email','Parents_phone','School','Men_name','Emp_name','start_date','last_date',)
+                   'Parents_email','Parents_phone','School','Men_name','Emp_name','Comments','start_date','last_date',)
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

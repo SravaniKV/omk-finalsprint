@@ -77,10 +77,15 @@
             <i class="fa fa-fw fa-home"></i>
             Home
           </a>
-
         </li>
         <li>
             <a href="{% url 'home:markattendance' %}"><i class="fa fa-fw fa-check-square-o"></i> Mark Attendance</a>
+        </li>
+        <li>
+            <a  href="{% url 'home:mentstudlist' %}">
+            <i class="fa fa-fw fa-table"></i>
+            Student List
+          </a>
         </li>
         <li>
           <a  href="{% url 'home:studentsreports' %}"><i class="fa fa-fw fa-table"></i>Students Reports</a>
@@ -90,22 +95,9 @@
             <i class="fa fa-fw fa-calendar"></i>
             Create Appointments
           </a>
+        </li>
 
-        </li>
-        <li>
-            <a  href="{% url 'home:mentstudlist' %}">
-            <i class="fa fa-fw fa-table"></i>
-            Student List
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'home:mentortask' %}">
-            <i class="fa fa-fw fa-tasks"></i>
-            Task
-          </a>
-
-        </li>
-      </ul>
+        </ul>
     </div>
   </nav>
   <div id="page-wrapper">

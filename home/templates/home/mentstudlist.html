@@ -16,7 +16,7 @@
             <tbody>
 
             {% for students in students %}
-
+            {% ifequal students.Men_name|stringformat:"s" user.username %}
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
@@ -24,7 +24,7 @@
                     <td>{{ students.Parents_phone }}</td>
                     <td>{{ students.School }}</td>
                 </tr>
-
+            {% endifequal %}
             {% endfor %}
 
 

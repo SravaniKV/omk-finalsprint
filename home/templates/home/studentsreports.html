@@ -20,11 +20,11 @@
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
-                    <td>{{ students.Student_class }}</td>
+                    <td>{{ students.Student_Class }}</td>
                     <td>{{ students.Student_prev_grade }}</td>
-                    <td>{{ students.Student_current_grade }}</td>
+                    <td>{{ students.Student_curr_grade }}</td>
                     <td>{{ students.Comments }}</td>
-                    <td><a href="{% url 'home:' pk=students.pk%}" class="btn btn-warning">Edit</a>
+                    <td><a href="{% url 'home:Student_Report_Edit' pk=students.pk%}" class="btn btn-warning">Edit</a>
                 </tr>
             {% endfor %}
             </tbody>
