@@ -18,7 +18,7 @@
             <tbody>
             {% now 'Y-m-d' as currt_date %}
             {% for students in students %}
-
+            {% ifequal students.Emp_name|stringformat:"s" user.username %}
                 {% if students.last_date|date:"Y-m-d" >= currt_date or students.last_date == NULL %}
                 <tr>
                     <td>{{ students.Student_id }}</td>
@@ -31,8 +31,9 @@
                     <td><a href="{% url 'home:studentsarchive' %}" class="btn btn-danger">Archive</a>
                     </td>
                 </tr>
-                {% endif %}
 
+                {% endif %}
+            {% endifequal %}
             {% endfor %}
             </tbody>
         </table>

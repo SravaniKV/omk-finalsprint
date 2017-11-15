@@ -18,6 +18,7 @@
             <tbody>
 
             {% for students in students %}
+                {% ifequal students.Emp_name|stringformat:"s" user.username %}
                 <tr>
                     <td>{{ students.Student_id }}</td>
                     <td>{{ students.Student_name }}</td>
@@ -27,6 +28,7 @@
                     <td>{{ students.Comments }}</td>
                     <td><a href="{% url 'home:Emp_Student_Report_Edit' pk=students.pk%}" class="btn btn-warning">Edit</a>
                 </tr>
+                {% endifequal %}
             {% endfor %}
             </tbody>
         </table>
