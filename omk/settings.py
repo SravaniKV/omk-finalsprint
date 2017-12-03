@@ -93,14 +93,14 @@ WSGI_APPLICATION = 'omk.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8cjd14ae7va56',
-        'USER': 'siuxctnyyatnib',
-        'PASSWORD': '01d93487bd926eb422e448ee02f81525c8de1ef4d7d7eb52517921e1239048a1',
-        'HOST': 'ec2-50-19-110-195.compute-1.amazonaws.com',
-        'PORT': '5432',
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       # 'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'd8cjd14ae7va56',
+        #'USER': 'siuxctnyyatnib',
+        #'PASSWORD': '01d93487bd926eb422e448ee02f81525c8de1ef4d7d7eb52517921e1239048a1',
+        #'HOST': 'ec2-50-19-110-195.compute-1.amazonaws.com',
+        #'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

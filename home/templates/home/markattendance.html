@@ -1,6 +1,6 @@
 {% extends 'home/index.html' %}
 {% block content %}
-
+<form method="post" action="{% url 'markattendancedb'  %}>
 <div class="container-fluid">
 
 <div>
@@ -12,7 +12,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Class</th>
-                  <th>Attendance</th>
+                  <th>ttendance</th>
                 </tr>
               </thead>
               <tbody>
@@ -23,7 +23,7 @@
                   <td>{{ students.Student_Class }}</td>
                   <td>
                         <label class="switch">
-                        <input id="toggle-slider_position()" type="checkbox">
+                        <input id="toggle-slider_position()" type="checkbox" name="att" >
                         <span class="slider round"></span>
                         </label>
                   </td>
@@ -43,13 +43,13 @@
                              <div class='col-sm-4' align="center">
                                 <div class="form-group">
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" />
+                                        <input type='text' class="form-control" name="date" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                 </div>
-                                 <button class="btn btn-lg">Submit</button>
+                                 <input type="submit" class="btn btn-lg" value="Submit">
                             </div>
                              <div class="col-sm-4">
 
@@ -61,4 +61,6 @@
 
       </div>
 </div>
+</form>
 {% endblock %}
+

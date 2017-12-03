@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^studentlist/$', views.Student_list, name='studentlist'),
     url(r'^mentstudlist/$', views.mentstudlist, name='mentstudlist'),
     url(r'^student/(?P<pk>\d+)/edit/$', views.studentedit, name='studentedit'),
-    url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
+    #url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
     url(r'^studentadd/$', views.studentadd, name='studentadd'),
+    url(r'^mrkatt/$', views.markattendancedb, name='markattendancedb'),
         ]

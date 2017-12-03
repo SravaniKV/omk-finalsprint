@@ -1,12 +1,15 @@
+from django import forms
 from django.db import models
 from django.contrib.auth.models import Permission, User
 from django.core.validators import MinLengthValidator
 from django.core.validators import MaxLengthValidator
 from django.core.validators import RegexValidator
 from django.utils import timezone
+#form django import forms
 # Create your models here.
 
 regex=r'[0-9]'
+
 
 class Employee(models.Model):
     Employee_Id = models.CharField(max_length=10)
@@ -91,8 +94,10 @@ class ClassName(models.Model):
     class_name = models.CharField(max_length=20)
     class_date=models.DateField(blank=True, null=True)
     Mentor= models.ForeignKey(Mentor, related_name='class_mentor')
-    student = models.ManyToManyField(Student, related_name='class_student')
+    #student = models.CharField(max_length=20, null=True)
+    student= models.ManyToManyField(Student, related_name='class_student')
     attendance = models.BooleanField(default=True)
+    #attendance =models.ChoiceField(widget=forms.RadioSelect)
 
     def __str__(self):
         return str(self.class_name)

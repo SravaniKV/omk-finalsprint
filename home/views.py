@@ -15,7 +15,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.db.models import Q
 from .models import Student,Mentor,Employee
-from .forms import StudentForm,UserForm,EmployeeForm
+from .forms import StudentForm,UserForm,EmployeeForm,ClassNameForm
 
 
 def searchemp(request):
@@ -95,10 +95,6 @@ def mentorhome(request):
     return render(request, 'home/mentorhome.html',
                   {'students':students})
 
-def markattendance(request):
-    students = Student.objects.all()
-    return render(request, 'home/markattendance.html',
-                  {'students': students})
 
 #def studentsreports(request):
 #    return render(request, 'home/studentsreports.html',
@@ -273,30 +269,6 @@ def studentadd(request):
         # print("Else")
     return render(request, 'home/studentadd.html', {'form': form})
 
-
-
-def studentsarchive(request):
-    student = get_object_or_404(Student)
-    if request.method =="POST":
-       form = StudentForm(request.POST, instance = student)
-       print("one")
-       if form.is_valid():
-           print("2")
-           student= form.save()
-           print("3")
-           Stud_id = form.cleaned_data['Student ID']
-           print("4")
-           student_arch= Student.object.filter(Student_id = Stud_id)
-           print("5")
-           student_arch.delete()
-           students = StudentForm(instance=student)
-           return render(request, 'home/studentlist.html', {'students': students})
-
-    else:
-           print("else")
-     #  form = StudentForm(instance=student)
-      # return render(request, 'home/studentsarchive.html', {'form': form})
-
 def mentor_list(request):
     mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
     return render(request, 'home/mentorlist.html',
@@ -333,4 +305,28 @@ def mentor_new(request):
     return render(request, 'home/mentornew.html', {'form': form})
 
 
+def markattendance(request):
+    form = ClassNameForm(request.POST)
+    if form.is_valid():
+     ClassName= form.save()
+     ClassName.save()
+     #students = Student.objects.all()
+     ClassNames=ClassName.objects.all()
+     print("IF")
+    # return render(request, 'home/markattendance.html',
+     #              {'students': students})
+     return render(request, 'home/markattendance.html',
+                   {'ClassNames': ClassNames})
 
+
+    else:
+        print("ELse")
+        students = Student.objects.all()
+        return render(request, 'home/markattendance.html',
+                      {'students': students})
+def markattendancedb(request):
+    attcheck=request.POST.get('att', None)
+    date=request.POST.get('date', None)
+    print(attcheck)
+    print(date)
+    return HttpResponseRedirect(request, 'mentorhome.html')
