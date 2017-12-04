@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import ChoiceField, RadioSelect
 
-from .models import Employee, Mentor, Student , ClassName
+from .models import Employee, Mentor, Student , ClassName , Attendance
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
@@ -35,3 +35,7 @@ class ClassNameForm(forms.ModelForm):
           model = ClassName
           fields=('class_name', 'class_date','Mentor',)
           #attendance= forms.ChoiceField(required=True, widget=forms.RadioSelect(attrs={'class':'Radio'}),choices=(('abscent','Abscent'),('present','Present'),))
+class AttendanceForm(forms.ModelForm):
+      class Meta:
+          model = Attendance
+          fields = ('stu_name','attend','attend_date',)

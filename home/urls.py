@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^emphome/$', views.emphome, name='emphome'),
     url(r'^mentorhome/$', views.mentorhome, name='mentorhome'),
     url(r'^markattendance/$', views.markattendance, name='markattendance'),
+    url(r'^markattendanceedit/(?P<pk>\d+)/edit/$', views.markattendanceedit, name='markattendanceedit'),
     url(r'^studentsreports/$', views.Student_Report, name='studentsreports'),
     url(r'^studentsreportsedit/(?P<pk>\d+)/edit/$', views.Student_Report_Edit, name='Student_Report_Edit'),
     url(r'^createappointments/$', views.createappointments, name='createappointments'),
@@ -35,7 +36,7 @@ urlpatterns = [
     url(r'^studentlist/$', views.Student_list, name='studentlist'),
     url(r'^mentstudlist/$', views.mentstudlist, name='mentstudlist'),
     url(r'^student/(?P<pk>\d+)/edit/$', views.studentedit, name='studentedit'),
-    #url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
+    url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
     url(r'^studentadd/$', views.studentadd, name='studentadd'),
-    url(r'^mrkatt/$', views.markattendancedb, name='markattendancedb'),
+    #url(r'^mrkatt/$', views.markattendance, name='markattendance'),
         ]

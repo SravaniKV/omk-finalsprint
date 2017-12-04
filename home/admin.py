@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Employee, Mentor, Student, ClassName
+from .models import Employee, Mentor, Student, ClassName, Attendance
 
 
 
@@ -22,7 +22,12 @@ class ClassNameList(admin.ModelAdmin):
     list_display = ('class_name', 'class_date','Mentor')
     search_fields =  ('class_name', 'class_date','Mentor',)
 
+class  AttendanceList(admin.ModelAdmin):
+    list_display = ('stu_name','attend','attend_date')
+
+
 admin.site.register(Employee,EmployeeList )
 admin.site.register(Mentor,MentorList)
 admin.site.register(Student, StudentList)
 admin.site.register(ClassName, ClassNameList)
+admin.site.register(Attendance, AttendanceList)

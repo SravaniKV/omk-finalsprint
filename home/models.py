@@ -25,11 +25,11 @@ class Employee(models.Model):
 
 
 class Mentor(models.Model):
-    Mentor_Id = models.CharField(max_length=10)
+    Mentor_Id = models.CharField(max_length=10,unique=True)
     Mentor_name = models.CharField(max_length=49)
     Mentor_phone = models.CharField(max_length=10, validators=[MinLengthValidator(10), RegexValidator(regex)],
                                     help_text="Phone Number should be 10 digits")
-    Mentor_email = models.EmailField(max_length=49, default='X@gmail.com')
+    Mentor_email = models.EmailField(max_length=49, null=True)
     Mentor_Address=models.CharField(max_length=200)
     Mentor_Gender=models.CharField(max_length=10, default ='X' ,help_text="Enter F or M")
     #    student_count = models.IntegerField(max_digits=10) (we should do the hardcode in later sprint)
@@ -48,12 +48,12 @@ class Mentor(models.Model):
        return str(self.Mentor_name)
 
 class Student(models.Model):
-     Student_id= models.CharField(max_length=15)
-     Student_name=models.CharField(max_length=49)
-     Student_curr_grade = models.CharField(max_length=10, default='F')
-     Student_prev_grade = models.CharField(max_length=10, default='F')
+     Student_id= models.CharField(max_length=15,unique=True)
+     Student_name=models.CharField(max_length=49,null=True)
+     Student_curr_grade = models.CharField(max_length=10, null=True)
+     Student_prev_grade = models.CharField(max_length=10, null=True)
      Student_Class = models.CharField(max_length=10)
-     Parents_email = models.EmailField(max_length=200, default='X@gmail.com')
+     Parents_email = models.EmailField(max_length=200, null=True)
      Parents_phone = models.CharField(validators=[MinLengthValidator(10), RegexValidator(regex)], max_length=10)
      School= models.CharField(max_length=49)
      Men_name =models.ForeignKey(Mentor,related_name='Menemail')
@@ -102,6 +102,17 @@ class ClassName(models.Model):
     def __str__(self):
         return str(self.class_name)
 
+class Attendance(models.Model):
+    stu_name = models.ForeignKey(Student,related_name='studentname')
+    attend = models.BooleanField(default=False)
+    attend_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.stu_name)
+
+    def create(self):
+        self.attend_date = timezone.now()
+        self.save()
 
 
 
