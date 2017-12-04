@@ -6,8 +6,8 @@
             <form class ="navbar-form navbar-left" style="text-align: center;" role="search" method="get" action="{% url 'home:searchment' %}">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" value="{{ request.GET.name }}" placeholder="Search by name" >
-                    <input type="text" class="form-control" name="currgrade" value="{{ request.GET.currgrade }}" placeholder="Search by Current grade" >
-                    <input type="text" class="form-control" name="prevgrade" value="{{ request.GET.prevgrade }}" placeholder="Search by Previous grade" >
+                    <!--<input type="text" class="form-control" name="currgrade" value="{{ request.GET.currgrade }}" placeholder="Search by Current grade" >-->
+                    <!--<input type="text" class="form-control" name="prevgrade" value="{{ request.GET.prevgrade }}" placeholder="Search by Previous grade" >-->
                 </div>
                     <button type="submit" class="btn btn-default">Search</button>
             </form>
@@ -19,8 +19,8 @@
 <tr class="bg-info">
 <th>Student ID</th>
 <th>Student Name</th>
-<th>Student Current Grade</th>
 <th>Student Previous Grade</th>
+<th>Student Current Grade</th>
 <th>Student School Name</th>
 </tr>
 </thead>
@@ -29,8 +29,8 @@
 <tr>
 <td>{{ students.Student_id }}</td>
 <td>{{ students.Student_name }}</td>
-<td>{{ students.Student_curr_grade }}</td>
 <td>{{ students.Student_prev_grade }}</td>
+<td>{{ students.Student_curr_grade }}</td>
 <td>{{ students.School }}</td>
 
 </tr>

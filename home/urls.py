@@ -38,6 +38,5 @@ urlpatterns = [
     url(r'^student/(?P<pk>\d+)/edit/$', views.studentedit, name='studentedit'),
     url(r'^studentsarchive/$', views.studentsarchive, name='studentsarchive'),
     url(r'^studentadd/$', views.studentadd, name='studentadd'),
-    #url(r'^mrkatt/$', views.markattendance, name='markattendance'),
     url(r'^archive/$', views.archive, name='archive'),
         ]

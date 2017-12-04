@@ -23,19 +23,16 @@ def searchemp(request):
     curr_grade_query = request.GET.get("currgrade")
     prev_grade_query = request.GET.get("prevgrade")
 
-    # if you want get user from request
-    # user = request.user.username
-
     students = None
-    if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
-        students = Student.objects.filter(
-            Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,Student_prev_grade__icontains=prev_grade_query)).distinct()
-    elif len(name_query) > 0:
+    #if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
+    #    students = Student.objects.filter(
+    #        Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,Student_prev_grade__icontains=prev_grade_query)).distinct()
+    if len(name_query) > 0:
         students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
-    elif len(curr_grade_query) > 0:
-        students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
-    elif len(prev_grade_query) > 0:
-        students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
+    #elif len(curr_grade_query) > 0:
+    #    students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
+    #elif len(prev_grade_query) > 0:
+    #    students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
     else:
         pass
     return render(request, 'home/emphome.html', {'students': students})
@@ -46,23 +43,21 @@ def searchment(request):
     curr_grade_query = request.GET.get("currgrade")
     prev_grade_query = request.GET.get("prevgrade")
 
-    # if you want get user from request
-    # user = request.user.username
-
     students = None
-    if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
-        students = Student.objects.filter(
-            Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,
-              Student_prev_grade__icontains=prev_grade_query)).distinct()
-    elif len(name_query) > 0:
+    #if (len(name_query) > 0) or (len(curr_grade_query) > 0) or (len(prev_grade_query) > 0):
+    #    students = Student.objects.filter(
+    #        Q(Student_name__icontains=name_query, Student_curr_grade__icontains=curr_grade_query,
+    #          Student_prev_grade__icontains=prev_grade_query)).distinct()
+    if len(name_query) > 0:
         students = Student.objects.filter(Q(Student_name__icontains=name_query)).distinct()
-    elif len(curr_grade_query) > 0:
-        students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
-    elif len(prev_grade_query) > 0:
-        students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
+    #elif len(curr_grade_query) > 0:
+    #    students = Student.objects.filter(Q(Student_curr_grade__icontains=curr_grade_query)).distinct()
+    #elif len(prev_grade_query) > 0:
+    #    students = Student.objects.filter(Q(Student_prev_grade__icontains=prev_grade_query)).distinct()
     else:
         pass
     return render(request, 'home/mentorhome.html', {'students': students})
+
 
 def home(request):
     return render(request, 'home/base.html',
@@ -311,37 +306,14 @@ def mrkatt_new(request):
             mrkatt = form.save(commit=False)
             mrkatt.start_date = timezone.now()
             mrkatt.save()
-            mrkatts = Attendance.objects.filter(attend_date__lte=timezone.now())
+            students = Student.objects.all()
             return render(request, 'home/markattendance.html',
-                          {'mrkatt': mrkatts})
+                          {'students': students})
     else:
         form = AttendanceForm()
         # print("Else")
     return render(request, 'home/markattendanceedit.html', {'form': form})
-"""
-def markattendanceedit(request,pk):
-    stud_attend = get_object_or_404(Student, pk=pk)
-    if request.method == "POST":
-        form = AttendanceForm(request.POST, instance=stud_attend)
-        if form.is_valid():
-            stud_attend = form.save()
-            stud_attend.updated_date = timezone.now()
-            stud_attend.save()
-            stud_attends = Student.objects.all()
-            return render(request, 'home/markattendance.html',
-                          {'stud_attend': stud_attends})
-    else:
-        #students = Student.objects.all()
-        #return render(request, 'home/markattendanceedit.html',
-        #              {'students': students})
-        form = AttendanceForm()
 
-        #stud_attends = Student.objects.filter(start_date__lte=timezone.now())
-        return render(request, 'home/markattendanceedit.html', {'form': form})
-    #students = Student.objects.all()
-    #return render(request, 'home/markattendance.html',
-    #              {'students': students})
-"""
 
 def markattendance(request):
     students = Student.objects.all()

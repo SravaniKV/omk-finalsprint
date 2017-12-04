@@ -26,13 +26,12 @@ class Employee(models.Model):
 
 class Mentor(models.Model):
     Mentor_Id = models.CharField(max_length=10,unique=True)
-    Mentor_name = models.CharField(max_length=49)
+    Mentor_name = models.CharField(max_length=49,null=True)
     Mentor_phone = models.CharField(max_length=10, validators=[MinLengthValidator(10), RegexValidator(regex)],
                                     help_text="Phone Number should be 10 digits")
     Mentor_email = models.EmailField(max_length=49, null=True)
     Mentor_Address=models.CharField(max_length=200)
     Mentor_Gender=models.CharField(max_length=10, null = True ,help_text="Enter F or M")
-    #    student_count = models.IntegerField(max_digits=10) (we should do the hardcode in later sprint)
     begining_date = models.DateField(default=timezone.now)
     ending_date = models.DateField(blank=True, null=True)
 
