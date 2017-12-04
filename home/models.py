@@ -31,7 +31,7 @@ class Mentor(models.Model):
                                     help_text="Phone Number should be 10 digits")
     Mentor_email = models.EmailField(max_length=49, null=True)
     Mentor_Address=models.CharField(max_length=200)
-    Mentor_Gender=models.CharField(max_length=10, default ='X' ,help_text="Enter F or M")
+    Mentor_Gender=models.CharField(max_length=10, null = True ,help_text="Enter F or M")
     #    student_count = models.IntegerField(max_digits=10) (we should do the hardcode in later sprint)
     begining_date = models.DateField(default=timezone.now)
     ending_date = models.DateField(blank=True, null=True)

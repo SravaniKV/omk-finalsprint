@@ -369,3 +369,9 @@ def studentsarchive(request):
            print("else")
      #  form = StudentForm(instance=student)
       # return render(request, 'home/studentsarchive.html', {'form': form})
+
+
+def archive(request):
+    students = Student.objects.filter(start_date__lte=timezone.now())
+    return render(request, 'home/archive.html',
+                  {'students': students})
