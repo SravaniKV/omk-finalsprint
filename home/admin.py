@@ -23,7 +23,7 @@ class ClassNameList(admin.ModelAdmin):
     search_fields =  ('class_name', 'class_date','Mentor',)
 
 class  AttendanceList(admin.ModelAdmin):
-    list_display = ('stu_name','attend','attend_date')
+    list_display = ('stu_name','attend','attend_date','remarks',)
 
 
 admin.site.register(Employee,EmployeeList )

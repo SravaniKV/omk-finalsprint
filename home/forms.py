@@ -38,4 +38,4 @@ class ClassNameForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
       class Meta:
           model = Attendance
-          fields = ('stu_name','attend','attend_date',)
+          fields = ('stu_name','attend','attend_date','remarks',)

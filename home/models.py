@@ -105,6 +105,7 @@ class Attendance(models.Model):
     stu_name = models.ForeignKey(Student,related_name='studentname')
     attend = models.BooleanField(default=False)
     attend_date = models.DateTimeField(default=timezone.now)
+    remarks= models.CharField(max_length=250,default='attendance remarks')
 
     def __str__(self):
         return str(self.stu_name)
