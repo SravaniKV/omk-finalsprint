@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{ students.Student_name }}</td>
                     <td>{{ students.Student_Class }}</td>
-                    <td><a href="{% url 'home:markattendanceedit' pk=students.pk%}" class="btn btn-warning">Mark Attendance</a>
+                    <td><a href="{% url 'home:mrkatt_new' %}" class="btn btn-warning">Mark Attendance</a>
                 </tr>
                 {% endifequal %}
             {% endfor %}

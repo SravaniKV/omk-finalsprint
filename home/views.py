@@ -304,6 +304,21 @@ def mentor_new(request):
         # print("Else")
     return render(request, 'home/mentornew.html', {'form': form})
 
+def mrkatt_new(request):
+    if request.method == "POST":
+        form = AttendanceForm(request.POST)
+        if form.is_valid():
+            mrkatt = form.save(commit=False)
+            mrkatt.start_date = timezone.now()
+            mrkatt.save()
+            mrkatts = Attendance.objects.filter(attend_date__lte=timezone.now())
+            return render(request, 'home/markattendance.html',
+                          {'mrkatt': mrkatts})
+    else:
+        form = AttendanceForm()
+        # print("Else")
+    return render(request, 'home/markattendanceedit.html', {'form': form})
+"""
 def markattendanceedit(request,pk):
     stud_attend = get_object_or_404(Student, pk=pk)
     if request.method == "POST":
@@ -326,7 +341,7 @@ def markattendanceedit(request,pk):
     #students = Student.objects.all()
     #return render(request, 'home/markattendance.html',
     #              {'students': students})
-
+"""
 
 def markattendance(request):
     students = Student.objects.all()
