@@ -12,7 +12,7 @@ regex=r'[0-9]'
 
 
 class Employee(models.Model):
-    Employee_Id = models.CharField(max_length=10)
+    Employee_Id = models.CharField(max_length=10,unique=True)
     Employee_name = models.CharField(max_length=50)
     Employee_phone = models.CharField(max_length=10, validators=[MinLengthValidator(10), RegexValidator(regex)],
                                       help_text="Phone Number should be 10 digits")
