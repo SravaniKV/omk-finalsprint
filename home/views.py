@@ -81,12 +81,12 @@ def empindex(request):
                   {'empindex': empindex})
 
 def emphome(request):
-    students = Student.objects.filter(Emp_name__Employee_name=request.user.username)
+    students = Student.objects.filter(Emp_name__Employee_name=request.user.username).order_by('Student_name')
     return render(request, 'home/emphome.html',
                   {'students': students})
 
 def mentorhome(request):
-    students = Student.objects.filter(Men_name__Mentor_name=request.user.username)
+    students = Student.objects.filter(Men_name__Mentor_name=request.user.username).order_by('Student_name')
     return render(request, 'home/mentorhome.html',
                   {'students':students})
 
@@ -121,7 +121,7 @@ def emptask(request):
 
 def mentstudlist(request):
     #users = request.user.username()
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
     return render(request, 'home/mentstudlist.html',
                   {'students': students})
 
@@ -188,17 +188,17 @@ def password_reset_complete(request):
     {'home': password_reset_complete})
 
 def Student_list(request):
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
     return render(request, 'home/studentlist.html',
     {'students': students})
 
 def Student_Report(request):
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
     return render(request, 'home/studentsreports.html',
     {'students': students})
 
 def Emp_Student_Report(request):
-    students = Student.objects.filter(start_date__lte=timezone.now())
+    students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
     return render(request, 'home/empstudentsreports.html',
     {'students': students})
 
@@ -210,7 +210,7 @@ def Student_Report_Edit(request,pk):
             student = form.save()
             student.updated_date = timezone.now()
             student.save()
-            students = Student.objects.filter(start_date__lte=timezone.now())
+            students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
             return render(request, 'home/studentsreports.html',
             {'students': students})
     else:
@@ -226,7 +226,7 @@ def Emp_Student_Report_Edit(request,pk):
             student = form.save()
             student.updated_date = timezone.now()
             student.save()
-            students = Student.objects.filter(start_date__lte=timezone.now())
+            students = Student.objects.filter(start_date__lte=timezone.now()).order_by('Student_name')
             return render(request, 'home/empstudentsreports.html',
             {'students': students})
     else:
@@ -265,7 +265,7 @@ def studentadd(request):
     return render(request, 'home/studentadd.html', {'form': form})
 
 def mentor_list(request):
-    mentors = Mentor.objects.filter(begining_date__lte=timezone.now())
+    mentors = Mentor.objects.filter(begining_date__lte=timezone.now()).order_by('Mentor_name')
     return render(request, 'home/mentorlist.html',
                  {'mentors': mentors})
 
@@ -316,7 +316,7 @@ def mrkatt_new(request):
 
 
 def markattendance(request):
-    students = Student.objects.all()
+    students = Student.objects.all().order_by('Student_name')
     return render(request, 'home/markattendance.html',
                   {'students': students})
 
@@ -331,7 +331,7 @@ def studentsarchive(request):
            print("3")
            Stud_id = form.cleaned_data['Student ID']
            print("4")
-           student_arch= Student.object.filter(Student_id = Stud_id)
+           student_arch= Student.object.filter(Student_id = Stud_id).order_by('Student_name')
            print("5")
            student_arch.delete()
            students = StudentForm(instance=student)
