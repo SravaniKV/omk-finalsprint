@@ -27,8 +27,9 @@
 </thead>
 <tbody>
 {% for students in students %}
-{% if students.Student_prev_grade > students.Student_curr_grade%}
-<tr style= "background : lightgreen">
+{% if students.Student_prev_grade < students.Student_curr_grade%}
+<!--<tr style= "background : lightgreen">-->
+<tr style= "background : red">
 	<td>{{ students.Student_id }}</td>
 	<td>{{ students.Student_name }}</td>
 	<td>{{ students.Student_prev_grade }}</td>
