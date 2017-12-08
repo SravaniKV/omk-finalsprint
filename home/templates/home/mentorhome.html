@@ -27,14 +27,25 @@
 </thead>
 <tbody>
 {% for students in students %}
-<tr>
-<td>{{ students.Student_id }}</td>
-<td>{{ students.Student_name }}</td>
-<td>{{ students.Student_prev_grade }}</td>
-<td>{{ students.Student_curr_grade }}</td>
-<td>{{ students.School }}</td>
+{% if students.Student_prev_grade > students.Student_curr_grade%}
+<tr style= "background : lightgreen">
+	<td>{{ students.Student_id }}</td>
+	<td>{{ students.Student_name }}</td>
+	<td>{{ students.Student_prev_grade }}</td>
+	<td>{{ students.Student_curr_grade }}</td>
+	<td>{{ students.School }}</td>
+</tr>
+
+{% else %}
+	<tr>
+	<td>{{ students.Student_id }}</td>
+	<td>{{ students.Student_name }}</td>
+	<td>{{ students.Student_prev_grade }}</td>
+	<td>{{ students.Student_curr_grade }}</td>
+	<td>{{ students.School }}</td>
 
 </tr>
+{% endif %}
 {% endfor %}
 </tbody>
 </table>
